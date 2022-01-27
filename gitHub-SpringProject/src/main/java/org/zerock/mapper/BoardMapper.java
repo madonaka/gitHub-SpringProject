@@ -10,5 +10,5 @@ public interface BoardMapper {
 	//@Select("select * from tbl_board where bno < 100")
 	public List<BoardVO> getList();
 	
-	
+	public BoardVO getView(int bno);
 }

@@ -10,4 +10,7 @@
 	]]>
 </select>
 
+<select id="getView" resultType="org.zerock.domain.BoardVO">
+	select * from tbl_board where bno = #{bno}
+</select>
 </mapper>

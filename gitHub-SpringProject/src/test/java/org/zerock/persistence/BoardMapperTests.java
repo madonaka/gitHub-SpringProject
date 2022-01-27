@@ -5,6 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.zerock.domain.BoardVO;
 import org.zerock.mapper.BoardMapper;
 
 import lombok.Setter;
@@ -18,8 +19,15 @@ public class BoardMapperTests {
 	@Setter(onMethod_= @Autowired)
 	private BoardMapper mapper;
 
-	@Test
+	/*@Test
 	public void testGetList() {
 		mapper.getList().forEach(board -> log.info(board));
+	}*/
+	
+	@Test
+	public void testGetView() {
+		BoardVO vo = mapper.getView(111);
+		
+		log.info(vo);
 	}
 }
