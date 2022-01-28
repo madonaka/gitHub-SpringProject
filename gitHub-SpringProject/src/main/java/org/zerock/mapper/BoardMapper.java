@@ -11,4 +11,12 @@ public interface BoardMapper {
 	public List<BoardVO> getList();
 	
 	public BoardVO getView(int bno);
+	
+	public void insert(BoardVO board);
+	
+	public void insertSelectKey(BoardVO board);
+	
+	public int modify(BoardVO board);
+	
+	public int delete(int bno);
 }
