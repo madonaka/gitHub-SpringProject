@@ -28,25 +28,25 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Override
 	public boolean modify(BoardVO board) {
-		// TODO Auto-generated method stub
-		return false;
+		log.info("modify......."+board);
+		return mapper.modify(board) == 1;
 	}
 	
 	@Override
 	public List<BoardVO> getList() {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("getList......");
+		return mapper.getList();
 	}
 	
 	@Override
 	public BoardVO get(int bno) {
-		// TODO Auto-generated method stub
-		return null;
+		log.info("get.........."+bno);
+		return mapper.getView(bno);
 	}
 	
 	@Override
 	public boolean delete(int bno) {
-		// TODO Auto-generated method stub
-		return false;
+		log.info("delete......."+bno);
+		return mapper.delete(bno) == 1;		
 	}
 }
