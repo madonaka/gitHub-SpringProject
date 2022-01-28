@@ -24,10 +24,45 @@ public class BoardMapperTests {
 		mapper.getList().forEach(board -> log.info(board));
 	}*/
 	
-	@Test
+	/*@Test
 	public void testGetView() {
 		BoardVO vo = mapper.getView(111);
 		
 		log.info(vo);
+	}*/
+	
+	/*@Test
+	public void testInsert() {
+		
+		BoardVO vo = new BoardVO();
+		vo.setTitle("테스트 중입니다");
+		vo.setContent("테스트 중인 내용입니다.");
+		vo.setWriter("라이터테스트");
+		
+		mapper.insertSelectKey(vo);
+		
+		log.info(vo);
+	}*/
+	
+	/*
+	@Test
+	public void testModify() {
+		BoardVO vo = new BoardVO();
+		vo.setBno(3000801);
+		vo.setTitle("수정수정");
+		vo.setContent("내용내용");
+		vo.setWriter("글쓴이글쓴이");
+		
+		int count = mapper.modify(vo);
+		log.info("update count : "+ count);
+	}*/
+	
+	@Test
+	public void testDelete() {
+		int bno = 3000801;
+		
+		int count = mapper.delete(bno);
+		
+		log.info("delete count :"+ count);
 	}
 }
