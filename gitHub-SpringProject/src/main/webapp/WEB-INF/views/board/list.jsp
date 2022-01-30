@@ -11,9 +11,13 @@
 
 </head>
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
+<%@ include file= "../include/topmenu.jsp"  %>
+
 <table border="0" width="800">
   <tr>
     <td width="20%" height="500" valign="top" bgcolor="#ecf1ef">
+
+<%@ include file= "../include/login_form.jsp"  %>
 
 	<!-- 다음에 추가할 부분 --></td>
 
@@ -42,7 +46,7 @@
 			<font face="돋움" size="2" color="#000000">${board.bno }</font></td>
 			<td align="left" height="20">&nbsp;
 				<font face="돋움" size="2" color="#000000">
-				<a class="list" href="">${board.title }</a></td>
+				<a class="list" href="/board/get?bno=${board.bno}">${board.title }</a></td>
 					<td align="center" height="20"><font face="돋움" size="2">
 					<a class="list" href="mailto:ein1027@nate.com">${board.writer }</a></font></td>
 				<td align="center" height="20"><font face="돋움" size="2"><fmt:formatDate value="${board.regdate }" pattern="yyyy-MM-dd hh:mm"/></font></td>
@@ -103,5 +107,7 @@
 		</tr>
 	</table>
 </body>
+ <%@ include file= "../include/copyright.jsp"  %>
+
 </html>
 

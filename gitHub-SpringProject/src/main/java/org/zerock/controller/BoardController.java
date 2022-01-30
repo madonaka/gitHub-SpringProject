@@ -3,6 +3,7 @@ package org.zerock.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,7 +34,7 @@ public class BoardController {
 		model.addAttribute("list", service.getList(cri));
 	}
 	
-	@PostMapping("/register")
+	@PostMapping("/write")
 	public String register(BoardVO board, RedirectAttributes rttr) {
 		log.info("register : "+board);
 		service.register(board);
@@ -41,10 +42,14 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}	
-	@GetMapping("/get")
-	public void get( @RequestParam("bno") int bno, Model model) {
-		log.info("/get");
+	@GetMapping({"/get","/modify","/delete"})
+	public void get( @RequestParam("bno") int bno, Model model, @ModelAttribute("cri") Criteria cri ) {
+		log.info("/get or /modify or /delete");
 		model.addAttribute("board", service.get(bno));
+	}
+	@GetMapping("/write")
+	public void write(Model model, @ModelAttribute("cri") Criteria cri ) {
+		log.info("/write");
 	}
 	
 	@PostMapping("/modify")
@@ -55,7 +60,7 @@ public class BoardController {
 		}
 		return "redirect:/board/list";
 	}
-	@PostMapping("/remove")
+	@PostMapping("/delete")
 	public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr) {
 		log.info("remove : " + bno);
 		if(service.delete(bno)) {
