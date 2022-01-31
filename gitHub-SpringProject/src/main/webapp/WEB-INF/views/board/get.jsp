@@ -1,4 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
  <html>
  <head><meta http-equiv="Content-Type" content="text/html; charset=euc-kr">
@@ -33,14 +34,14 @@
        <table border="0" width="90%" align="center" cellspacing="0"  style="border-width:1px;border-color:#0066cc;border-style:outset;">
          <tr bgcolor="e3e9ff">
            <td class="title">
-             <img src="/resources/img/bullet-04.gif"> <font size="2" face="돋움">제목부분</font>
+             <img src="/resources/img/bullet-04.gif"> <font size="2" face="돋움"><c:out value="${board.title }"></c:out></font>
            </td>
          </tr>
          <tr>
            <td class="content">
              <p align="right"><font size="2" face="돋움">
-              <a class="list" href="mailto:ein1027@nate.com">나종민</a> / <font size="2" face="돋움">2007-1022 / 2번 읽음</font>
-             <p>내용이 들어가는 부분<p><!--contents의 내용을 <BR>태그로 처리-->
+              <a class="list" href="mailto:ein1027@nate.com"><c:out value="${board.writer }"></c:out> <font size="2" face="돋움"><c:out value="${board.regdate }"></c:out>/ 2번 읽음</font>
+             <p><c:out value="${board.content }"></c:out><p><!--contents의 내용을 <BR>태그로 처리-->
            </td>
          </tr>
        </table>
