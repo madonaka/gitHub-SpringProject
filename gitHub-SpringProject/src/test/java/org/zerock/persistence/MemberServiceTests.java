@@ -1,8 +1,11 @@
 package org.zerock.persistence;
 
+import javax.inject.Inject;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.zerock.domain.MemberVO;
@@ -19,13 +22,16 @@ public class MemberServiceTests {
 	@Setter(onMethod_= {@Autowired})
 	private MemberService service;
 	
+	@Inject
+	BCryptPasswordEncoder pwdEncoder;
+
 	
 	@Test
 	public void testInsert() {
 		MemberVO vo = new MemberVO();
 		vo.setName("테스터3");
 		vo.setUserid("test1236");
-		vo.setPassword("test1236");
+		vo.setPassword(pwdEncoder.encode("test1236"));
 		vo.setEmail("test1236@gmail.com");
 		
 		service.userinfo_insert(vo);

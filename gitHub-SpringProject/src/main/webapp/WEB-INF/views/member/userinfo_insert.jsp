@@ -27,7 +27,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 
   </td>
   <td width="80%" valign="top">&nbsp;<img src="/resources/img/title1.gif" ><br>    
-	<form>
+	<form name="insert" method="post" action="/member/userinfo_insert">
 	<table border=0 cellpadding=0 cellspacing=0 border=0 width=730 valign=top>
 		<tr><td align=center><br>                            
 			<table cellpadding=0 cellspacing=0 border=0 width=650 align=center>       
@@ -65,7 +65,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 							<tr>
 								<TD BGCOLOR="#EFF4F8">&nbsp;비밀번호<font color=red>&nbsp;*</font></td>
 								<TD BGCOLOR=WHITE>
-									<input type=password name=passwd size=8 maxlength=12 style="width:80">
+									<input type=password name=password size=8 maxlength=12 style="width:80">
 											6~12자 이내의 영문이나 숫자만 가능합니다.
 								</td>
 							</tr>
@@ -93,6 +93,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 							</tr>
 							<tr bgcolor=#ffffff>
 								<td colspan=3 align=center>
+									<input type="submit" value="제출">
 									<img src="/resources/img/u_bt06.gif" vspace=3 border=0 name=img3>
 									<img src="/resources/img/u_bt05.gif" border=0 hspace=10 vspace=3 name=img4>
 								</td>
