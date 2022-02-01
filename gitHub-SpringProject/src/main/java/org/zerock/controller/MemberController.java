@@ -28,5 +28,10 @@ public class MemberController {
 		
 	}
 	
+	@GetMapping("/userinfo_insert")
+	public void userinfoInsert() {
+		log.info("userinfoInsert");
+	}
+	
 	
 }
