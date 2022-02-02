@@ -1,6 +1,16 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib uri ="http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 
-
+<Script>
+	//컨트롤러에 post 방식으로 넘기기
+	function goPost(url){
+		let f = document.createElement('form');
+		f.setAttribute('method','post');
+		f.setAttribute('action',url);
+		document.body.appendChild(f);
+		f.submit();
+	}
+</Script>
 <html>
  <head><title>Web Programming Test</title>
  <link rel="stylesheet" type="text/css" href="/stylesheet.css">
@@ -12,7 +22,7 @@
  <table border="0" cellspacing="2" bgcolor="#ecf1ef" width="900" bordercolordark="#ffffff" bordercolorlight="#000000">
    <tr>
      <td width="20%" rowspan="4" valign="bottom" bgcolor="#000000">
-       <a href="index"><img src="/resources/img/ceo.png" width="158" height="83" border="0"></a>
+       <a href="/"><img src="/resources/img/ceo.png" width="158" height="83" border="0"></a>
        <font style="font-size:9pt;color:white;font-family:돋움"><b>Total 136,489
        <font color="yellow"></font>
        | Now 178
@@ -20,12 +30,12 @@
        </b></font>
      </td>
      <td bgcolor="#9966ff" width="10%" height="25" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">로그인</A></b></font></p>
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">로그아웃</A></b></font></p>
+     <p align="center"><c:if test="${session == null}"><font color="white" size="2"><b><a href="/member/userlogin_form" class="white">로그인</A></b></font></c:if></p>
+     <p align="center"><c:if test="${session != null}"><font color="white" size="2"><b><a href="javascript:void(0)" onclick="javascript:goPost('/member/logout')" class="white">로그아웃</A></b></font></c:if></p>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">회원가입</a></b></font></p>
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">정보수정</a></b></font></p>
+     <p align="center"><c:if test="${session == null}"><font color="white" size="2"><b><a href="/member/userinfo_insert" class="white">회원가입</a></b></font></c:if></p>
+     <p align="center"><c:if test="${session != null}"><font color="white" size="2"><b><a href="" class="white">정보수정</a></b></font></c:if></p>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
      <p align="center"><font color="white" size="2"><b>공지사항</b></font></p>

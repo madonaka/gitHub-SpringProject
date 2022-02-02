@@ -5,7 +5,6 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -63,7 +62,15 @@ public class MemberController {
 			return "redirect:/member/userlogin_form";		
 		}
 	}
-	
+	@PostMapping("/logout")
+	public String postLogout(RedirectAttributes rttr, HttpSession session) {
+		log.info("post logout");
+		session.invalidate();
+		
+		rttr.addFlashAttribute("row","로그아웃 되었습니다.");
+		
+		return "redirect:/member/userlogin_form";
+	}
 	@GetMapping("/userinfo_insert")
 	public void userinfoInsert() {
 		log.info("userinfoInsert");

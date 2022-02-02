@@ -36,7 +36,7 @@
  <table width="100%" height="120" border="0">
    <tr>
      <td bgcolor="#6FA0E" align="center" height="20">
-       <font size="2" color="white">홍길동 님!</font>
+       <font size="2" color="white"><c:if test="${session != null}">${session.userid }</c:if></font>
      </td>
    </tr>
    <tr>
@@ -52,7 +52,7 @@
  <table width="100%" height="120" border="0">
    <tr>
      <td bgcolor="#6FA0E" align="center" height="20">
-       <font size="2" color="white">홍길동민 님!</font>
+       <font size="2" color="white"><c:if test="${session != null}">${session.name }</c:if>님!</font>
      </td>
    </tr>
    <tr>
