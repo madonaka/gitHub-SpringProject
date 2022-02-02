@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <HTML>
 <HEAD>
 <TITLE>로그온</TITLE>
@@ -11,6 +11,12 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
       BACKGROUND-POSITION: left top; BACKGROUND-REPEAT: no-repeat;}
 //-->
 </STYLE>
+<c:if test="${row != null}">
+<script>
+	var row = '<c:out value="${row}"/>';
+	alert(row);	
+</script>
+</c:if>
 </HEAD>
 
 <%@ include file="../include/topmenu.jsp" %>
@@ -30,7 +36,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
   <TD width=100>&nbsp;</td>
   <TD>
     <table width="583" border="0" cellspacing="0" cellpadding="0" height="265">
-	  <form name=fname method=post >
+	  <form name="login" method="post" action="/member/userlogin_form" >
 	    <tr>
 		  <td height="298"> 
 		    <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -61,7 +67,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 							  <td><img src="/resources/img/h_bl02.gif" width="18" height="16"></td>
 							  <td nowrap>비밀번호</td>
 							  <td>: 
-								<input type=password name="passwd" size=14 maxlength=12 STYLE="WIDTH:155">
+								<input type=password name="password" size=14 maxlength=12 STYLE="WIDTH:155">
 							  </td>
 							  <td><input type=image src="/resources/img/login.gif" border=0 align=absmiddle></td>
 							</tr>
@@ -118,6 +124,7 @@ td   { font-family: 돋움, Verdana; font-size: 9pt; text-decoration: none; colo
 	</TD>
 </TR>
 </TABLE>
+</form>
 </td>
 </tr>
 </table>

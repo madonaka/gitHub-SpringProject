@@ -2,14 +2,22 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+
+<c:if test="${row != null}">
+<script>
+	var row = '<c:out value="${row}"/>';
+	alert(row);	
+</script>
+</c:if>
+
 <html>
 <head><title>게시판 읽기</title>
 <link rel="stylesheet" type="text/css" href="/stylesheet.css">
 <style type="text/css">
   a.list {text-decoration:none;color:black;font-size:10pt;}
 </style>
-
 </head>
+
 <body bgcolor="#FFFFFF" topmargin="0" leftmargin="0">
 <%@ include file= "../include/topmenu.jsp"  %>
 

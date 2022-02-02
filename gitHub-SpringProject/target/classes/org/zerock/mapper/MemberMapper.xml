@@ -8,4 +8,16 @@
 <insert id="userinfo_insert">
 	insert into tbl_gitTestMember(userid,name,password,email) values(#{userid},#{name},#{password},#{email})
 </insert>
+
+<select id="idCheck" resultType="int">
+	select count(*) from tbl_gittestmember where userid = #{userid}
+</select>
+
+<select id="pwCheck" resultType="String">
+	select password from tbl_gittestmember where userid = #{userid}
+</select>
+
+<select id="sessionInfo" resultType="org.zerock.domain.MemberVO">
+	select * from tbl_gittestmember where userid = #{userid}
+</select>
 </mapper>

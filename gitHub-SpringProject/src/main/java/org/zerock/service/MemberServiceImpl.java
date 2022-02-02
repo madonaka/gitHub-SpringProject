@@ -17,17 +17,26 @@ public class MemberServiceImpl implements MemberService {
 	@Setter(onMethod_=@Autowired)
 	private MemberMapper mapper;
 	
-	//UserSHA256 userSHA = new UserSHA256(); // 비밀번호 암호화 객체
-	
-	@Override
-	public int loginCheck(MemberVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 	@Override
 	public int userinfo_insert(MemberVO vo) {
-		//String password = vo.getPassword();
-		//vo.setPassword(userSHA.getSHA256(password)); //비밀번호 암호화 변환
 		return mapper.userinfo_insert(vo);
+	}
+	
+	@Override
+	public int idCheck(MemberVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.idCheck(vo);
+	}
+	
+	@Override
+	public String pwCheck(String id) {
+		// TODO Auto-generated method stub
+		return mapper.pwCheck(id);
+	}
+	
+	@Override
+	public MemberVO sessionInfo(String id) {
+		// TODO Auto-generated method stub
+		return mapper.sessionInfo(id);
 	}
 }
