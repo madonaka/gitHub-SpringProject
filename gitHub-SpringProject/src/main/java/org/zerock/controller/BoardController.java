@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
+import org.zerock.domain.PageMaker;
 import org.zerock.service.BoardService;
 
 import lombok.AllArgsConstructor;
@@ -32,6 +33,12 @@ public class BoardController {
 	public void list(Criteria cri, Model model) {
 		log.info("list");
 		model.addAttribute("list", service.getList(cri));
+		
+		PageMaker pm = new PageMaker();
+		pm.setCri(cri);
+		pm.setTotalCount(service.listCount());
+		
+		model.addAttribute("pageMaker", pm);
 	}
 	
 	@PostMapping("/write")
@@ -41,12 +48,14 @@ public class BoardController {
 		rttr.addFlashAttribute("result", board.getBno());
 		
 		return "redirect:/board/list";
-	}	
+	}
+	
 	@GetMapping({"/get","/modify","/delete"})
 	public void get( @RequestParam("bno") int bno, Model model, @ModelAttribute("cri") Criteria cri ) {
 		log.info("/get or /modify or /delete");
 		model.addAttribute("board", service.get(bno));
 	}
+	
 	@GetMapping("/write")
 	public void write(Model model, @ModelAttribute("cri") Criteria cri ) {
 		log.info("/write");
@@ -60,6 +69,7 @@ public class BoardController {
 		}
 		return "redirect:/board/list";
 	}
+	
 	@PostMapping("/delete")
 	public String remove(@RequestParam("bno") int bno, RedirectAttributes rttr) {
 		log.info("remove : " + bno);

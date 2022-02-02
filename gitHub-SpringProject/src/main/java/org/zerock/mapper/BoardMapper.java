@@ -2,6 +2,7 @@ package org.zerock.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Select;
 import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 
@@ -21,4 +22,7 @@ public interface BoardMapper {
 	public int modify(BoardVO vo);
 	
 	public int delete(int bno);
+	
+	@Select("select count(*) from tbl_board")
+	public int listCount();
 }

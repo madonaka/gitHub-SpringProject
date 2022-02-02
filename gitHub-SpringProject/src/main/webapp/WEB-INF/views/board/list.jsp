@@ -83,7 +83,18 @@
         <table width="700" border="0" cellspacing="0" cellpadding="5">
           <tr>&nbsp;</tr><tr>
              <td colspan="5">        
-                <div align="center">[1][2][3]</div>
+                <div align="center">
+                	<c:if test="${pageMaker.prev}">
+                		<a href="/board/list${pageMaker.makeQuery(pageMaker.startPage - 1)}"> 이전</a>
+                	</c:if>
+                	<c:forEach begin="${pageMaker.startPage}" end="${pageMaker.endPage}" var="idx">
+				    	<a href="/board/list${pageMaker.makeQuery(idx)}">${idx}</a></li>
+				    </c:forEach>
+				    <c:if test="${pageMaker.next && pageMaker.endPage > 0}">
+				    	<a href="/board/list${pageMaker.makeQuery(pageMaker.endPage + 1)}">다음</a></li>
+				    </c:if>               
+                
+                </div>
 			  </td>
 			 </tr>
 		</table>

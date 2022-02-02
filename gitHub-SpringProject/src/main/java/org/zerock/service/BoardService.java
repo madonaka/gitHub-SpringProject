@@ -17,4 +17,6 @@ public interface BoardService {
 	
 	//public List<BoardVO> getList();
 	public List<BoardVO> getList(Criteria cri); //페이징 처리
+	
+	public int listCount(); //리스트의 게시물 총 수
 }

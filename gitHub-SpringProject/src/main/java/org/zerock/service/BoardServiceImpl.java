@@ -56,4 +56,9 @@ public class BoardServiceImpl implements BoardService {
 		log.info("delete......."+bno);
 		return mapper.delete(bno) == 1;		
 	}
+	@Override
+	public int listCount() {
+		// TODO Auto-generated method stub
+		return mapper.listCount();
+	}
 }
