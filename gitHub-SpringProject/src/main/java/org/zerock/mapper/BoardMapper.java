@@ -23,6 +23,6 @@ public interface BoardMapper {
 	
 	public int delete(int bno);
 	
-	@Select("select count(*) from tbl_board")
+	//@Select("select count(*) from tbl_board")
 	public int listCount();
 }

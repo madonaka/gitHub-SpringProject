@@ -2,6 +2,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
 
 <c:if test="${row != null}">
 <script>
@@ -10,6 +12,19 @@
 </script>
 </c:if>
 
+<script>
+	function searchSend(){
+		if(searchForm.type.value==""){
+			alert("검색종류를 선택하세요");
+			return
+		}
+		if(searchForm.keyword.value==""){
+			alert("검색어를 입력하세요");
+			return
+		}
+		searchForm.submit();
+	}
+</script>
 <html>
 <head><title>게시판 읽기</title>
 <link rel="stylesheet" type="text/css" href="/stylesheet.css">
@@ -104,20 +119,24 @@
 			<td width="25%"> &nbsp;</td>
 			<td width="50%" align="center">
 				<table>
-					<form>	
+					<form name="searchForm" action="/board/list" method="get">	
 					<!-- 검색어를 이용하여 글제목, 작성자, 글내용 중에 하나를 입력 받아 처리하기 위한 부분 -->
 						<tr>
 							<td>
-								<select name="search">
-									<option value="">글제목</option>
-									<option value="">작성자</option>
-									<option value="">글내용</option>
+								<select name="type">
+									<option value="" <c:out value="${cri.type == null ? 'seleted':''}"/>>검색조건</option>
+									<option value="t"<c:out value="${cri.type eq 't' ? 'seleted':''}"/> >글제목</option>
+									<option value="w"<c:out value="${cri.type eq 'w' ? 'seleted':''}"/>>작성자</option>
+									<option value="c"<c:out value="${cri.type eq 'c' ? 'seleted':''}"/>>글내용</option>
 								</select>
 							</td>
-							<td> <input type="text" size=20 name=""></td>
-							<td> <a href="#"><img src="/resources/img/search2.gif" border="0"></a></td>
+							<td> <input type="text" size=20 name="keyword"/>
+							<input type="hidden" name="pageNem" value='${pageMaker.cri.pageNum }' />
+							<input type="hidden" name="amount" value='${pageMaker.cri.amount}'/>
+							<td> <button onclick="searchSend()">검색</button>
+							<a href="#"><img src="/resources/img/search2.gif" border="0"></a></td>
 						</tr>
-					</form>
+					</form> -->
 				</table>
 			</td>
 			<td width="25%" align="right">
