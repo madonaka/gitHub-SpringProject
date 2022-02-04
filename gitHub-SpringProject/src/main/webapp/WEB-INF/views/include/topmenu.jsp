@@ -44,7 +44,7 @@
      <p align="center"><font color="white" size="2"><a href="/board/list"><b>게시판</b></a></font></p>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="" class="white">자료실</a></b></font></p>
+     <p align="center"><font color="white" size="2"><b><a href="/pds/list" class="white">자료실</a></b></font></p>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
      <p align="center"><font color="white" size="2"><b><a href="" class="white">방명록</a></b></font></p>
