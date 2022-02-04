@@ -1,5 +1,7 @@
 package org.zerock.controller;
 
+import java.io.File;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
-import org.zerock.domain.PdsVO;
 import org.zerock.service.PdsService;
 
 import lombok.AllArgsConstructor;
@@ -41,12 +42,22 @@ public class PdsController {
 	}
 	
 	@PostMapping("/write")
-	public String postWrite(PdsVO vo, MultipartFile[] uploadFile) {
+	public void postWrite(MultipartFile[] uploadFile) {
+		
+		String uploadFolder ="C:\\Temp\\upload";
+		
 		for(MultipartFile multipartFile : uploadFile) {
 			log.info("--------------");
 			log.info("upload file name : "+multipartFile.getOriginalFilename());
 			log.info("upliad file size : "+multipartFile.getSize());
+			
+			File saveFile = new File(uploadFolder, multipartFile.getOriginalFilename());
+			
+			try {
+				multipartFile.transferTo(saveFile);
+			}catch(Exception e) {
+				log.error(e.getMessage());
+			}
 		}
-		return "redirect:/pds/list";
 	}
 }

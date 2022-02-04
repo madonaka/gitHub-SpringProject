@@ -42,10 +42,12 @@
      <img src="/resources/img/bullet-02.gif"><font size="2" face="돋움">는 필수 입력 사항입니다.</font><p>
      
      <form name="pds" method="post" action="/pds/write" enctype="multipart/form-data" >
-		<c:if test="${session !=null }">
+		<!--<c:if test="${session !=null }">
 		<input type="hidden" name="userid" value="${session.userid }">
-		</c:if>
+		</c:if>-->
+		
 	  <table border="0">
+       <!--
        <tr>
          <td width="5%" align="right"><img src="/resources/img/bullet-02.gif"></td>
          <td width="15%"><font size="2" face="돋움">글쓴이</font></td>
@@ -61,17 +63,18 @@
          <td align="right"><img src="/resources/img/bullet-02.gif"></td>
          <td><font size="2" face="돋움">내용</font></td>
          <td><textarea wrap="physical" rows="10" name="content" cols="60"></textarea></td>
-       </tr>
+       </tr>-->
        <tr>
          <td align="right"><img src="/resources/img/bullet-02.gif"></td>
          <td><font size="2" face="돋움">첨부파일</font></td>
-         <td><input type="file" size="60" name="filename" ></td>
+         <td><input type="file" size="60" name="uploadFile" multiple></td>
        </tr>
         <tr></tr>
 		<tr>
           <td align="right">&nbsp;</td>
           <td><font size="2">&nbsp;</font></td>
           <td>
+          	<button>submit</button>
              <a href="javascript:send()"><img src="/resources/img/save.gif" border=0></a>&nbsp;&nbsp;&nbsp;
              <a href="javascript:reset()"><img src="/resources/img/cancle.gif" border=0></a>
           </td>
