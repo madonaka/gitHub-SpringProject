@@ -45,11 +45,11 @@
 
 <insert id="insert">
 	<selectKey keyProperty="bno" order="BEFORE" resultType="int">
-		select seq_gittestpds_bno.nextval from dual
+		select seq_tbl_gittestpds_bno.nextval from dual
 	</selectKey>
 	
-	insert into tbl_board (bno, userid, title, content, writer, filename, regdate)
-			values(#{bno}, #{userid}, #{title}, #{content}, #{writer}, #{filename}, sysdate)
+	insert into tbl_gittestpds (bno, userid, title, content, writer, filename)
+			values(#{bno}, #{userid,jdbcType=VARCHAR}, #{title}, #{content}, #{writer,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR})
 	
 </insert>
 </mapper>
