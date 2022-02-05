@@ -136,11 +136,11 @@
 							<td> <button onclick="searchSend()">검색</button>
 							<a href="#"><img src="/resources/img/search2.gif" border="0"></a></td>
 						</tr>
-					</form> -->
+					</form>
 				</table>
 			</td>
 			<td width="25%" align="right">
-			<a href="#"><img src="/resources/img/write.gif" border="0"></a>
+			<a href="/pds/write"><img src="/resources/img/write.gif" border="0"></a>
 			</td>
 		</tr>
 	</table>

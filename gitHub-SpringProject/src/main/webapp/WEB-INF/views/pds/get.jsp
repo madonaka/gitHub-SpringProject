@@ -40,8 +40,13 @@
          <tr>
            <td class="content">
              <p align="right"><font size="2" face="돋움">
-              <a class="list" href="mailto:ein1027@nate.com"><c:out value="${pds.writer }"></c:out> <font size="2" face="돋움"><c:out value="${pds.regdate }"></c:out>/ 2번 읽음</font>
+              <c:out value="${pds.writer }"></c:out> <font size="2" face="돋움"><c:out value="${pds.regdate }"></c:out>/ 2번 읽음</font>
              <p><c:out value="${pds.content }"></c:out><p><!--contents의 내용을 <BR>태그로 처리-->
+           </td>
+         </tr>
+         <tr bgcolor="e3e9ff">
+           <td class="file">
+             <img src="/resources/img/bullet-04.gif"><a href="/pds/download?filename=${pds.filename }"><font size="2" face="돋움"><c:out value="${filename }"></c:out></font>
            </td>
          </tr>
        </table>

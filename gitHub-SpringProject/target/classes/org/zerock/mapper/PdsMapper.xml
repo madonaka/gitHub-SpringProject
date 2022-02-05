@@ -23,7 +23,7 @@
 <select id="getListWithPaging" resultType="org.zerock.domain.PdsVO">
 	<![CDATA[
 		select bno, title, content, writer, regdate
-   			 from (select/*+ index_desc(tbl_board pk_board) */ 
+   			 from (select/*+ index_desc(tbl_gittestpds pk_gittestpds) */ 
      		   rownum rn, bno, title, content, writer, regdate
       		  from tbl_gittestpds where
     ]]>

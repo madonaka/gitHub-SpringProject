@@ -3,11 +3,18 @@ package org.zerock.controller;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
 
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +22,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.Criteria;
@@ -52,12 +60,13 @@ public class PdsController {
 	}
 	
 	@PostMapping("/write")
-	public void postWrite(MultipartFile[] uploadFile, PdsVO pds, RedirectAttributes rttr) {
+	public String postWrite(MultipartFile[] uploadFile, PdsVO pds, RedirectAttributes rttr) {
 		
 		String uploadFolder ="C:\\Temp\\upload";
 		
 		//폴더만들기
-		File uploadPath = new File(uploadFolder, getFolder());
+		//File uploadPath = new File(uploadFolder, getFolder());
+		File uploadPath = new File(uploadFolder);
 		log.info("upload path: "+uploadPath);
 		
 		if(uploadPath.exists() == false) {
@@ -102,7 +111,7 @@ public class PdsController {
 				log.error(e.getMessage());
 			}
 		}
-		
+		return "redirect:/pds/list";
 	}
 	
 	private String getFolder() {
@@ -125,9 +134,38 @@ public class PdsController {
 		return false;
 	}
 	
-	@GetMapping({"/get","/modify","/delete"})
+	@GetMapping("/get")
 	public void get( @RequestParam("bno") int bno, Model model, @ModelAttribute("cri") Criteria cri ) {
-		log.info("/get or /modify or /delete");
+		log.info("/get");
+		
+		//원본파일명 추출
+		if(service.get(bno).getFilename()!=null) {
+			int fileidx = service.get(bno).getFilename().indexOf("_")+1;
+			String filename = service.get(bno).getFilename().substring(fileidx);
+			model.addAttribute("filename", filename);
+		}
+		
 		model.addAttribute("pds", service.get(bno));
 	}
+	
+	@GetMapping(value = "/download", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+	@ResponseBody
+	public ResponseEntity<Resource> get(String filename ) {
+		log.info("download file :" +filename);
+		
+		Resource resource = new FileSystemResource("C:\\Temp\\upload\\"+filename);
+		
+		log.info("resource: "+resource);
+		String resourceName = resource.getFilename();
+		
+		HttpHeaders headers = new HttpHeaders();
+		try {
+			headers.add("Content-Disposition", "attachment; filename="+new String(resourceName.getBytes("UTF-8"),"ISO-8859-1"));
+		}catch(UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+
+		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
+	}
+
 }
