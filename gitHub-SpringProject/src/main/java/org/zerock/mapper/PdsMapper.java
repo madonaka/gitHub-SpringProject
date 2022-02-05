@@ -13,5 +13,7 @@ public interface PdsMapper {
 	public int listCount();
 	
 	public int insert(PdsVO vo);
+	
+	public PdsVO getView(int bno);
 
 }

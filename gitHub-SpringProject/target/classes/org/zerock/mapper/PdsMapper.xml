@@ -52,4 +52,9 @@
 			values(#{bno}, #{userid,jdbcType=VARCHAR}, #{title}, #{content}, #{writer,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR})
 	
 </insert>
+
+<select id="getView" resultType="org.zerock.domain.PdsVO">
+	select * from tbl_gittestpds where bno = #{bno}
+</select>
+
 </mapper>

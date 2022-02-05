@@ -37,4 +37,9 @@ public class PdsServiceImpl implements PdsService {
 		log.info("resister...." + pds);
 		mapper.insert(pds);
 	}
+	@Override
+	public PdsVO get(int bno) {
+		// TODO Auto-generated method stub
+		return mapper.getView(bno);
+	}
 }

@@ -13,4 +13,6 @@ public interface PdsService {
 	
 	public void register(PdsVO pds);
 
+	public PdsVO get(int bno);
+
 }
