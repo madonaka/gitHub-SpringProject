@@ -15,5 +15,7 @@ public interface PdsMapper {
 	public int insert(PdsVO vo);
 	
 	public PdsVO getView(int bno);
+	
+	public int delete(int bno);
 
 }

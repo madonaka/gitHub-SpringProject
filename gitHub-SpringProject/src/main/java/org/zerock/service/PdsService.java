@@ -14,5 +14,7 @@ public interface PdsService {
 	public void register(PdsVO pds);
 
 	public PdsVO get(int bno);
+	
+	public boolean delete(int bno);
 
 }

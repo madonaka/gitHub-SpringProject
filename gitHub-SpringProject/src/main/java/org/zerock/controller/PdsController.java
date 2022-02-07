@@ -5,6 +5,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.UUID;
@@ -25,7 +27,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
 import org.zerock.domain.PdsVO;
@@ -141,9 +142,9 @@ public class PdsController {
 		return false;
 	}
 	
-	@GetMapping({"/get","/modify"})
+	@GetMapping({"/get","/modify","/delete"})
 	public void get( @RequestParam("bno") int bno, Model model, @ModelAttribute("cri") Criteria cri ) {
-		log.info("/get");
+		log.info("/get, /modify, /delete");
 		
 		//원본파일명 추출
 		if(service.get(bno).getFilename()!=null) {
@@ -180,6 +181,58 @@ public class PdsController {
 		//if(service.modify(board)) {
 		//	rttr.addFlashAttribute("result", "success");
 		//}
+		return "redirect:/pds/list";
+	}
+	
+	
+	//파일삭제처리
+	private void deleteFiles(int bno) {
+		log.info("deleteFiles bno : "+ bno);
+		String filename = service.get(bno).getFilename();
+		if(filename == null) {
+			return;
+		}
+		log.info("delete attach file...........");
+		log.info(filename);
+		
+		try {
+			Path file = Paths.get("C:\\Temp\\upload\\"+filename);
+			Files.deleteIfExists(file);
+			
+			if(Files.probeContentType(file).startsWith("image")) {
+				Path thumbnail = Paths.get("C:\\Users\\ckdwn\\git\\gitHub-SpringProject"
+						+ "\\gitHub-SpringProject\\src\\main\\webapp\\resources"
+						+ "\\uploadthumnail\\S_"+filename);
+				Files.delete(thumbnail);
+			}
+		}catch(Exception e) {
+			log.error("delete file error"+e.getMessage());
+		}
+	}
+	//파일존재여부
+	private int fileExists(String filename) {
+		File file = new File("C:\\Temp\\upload\\"+filename);
+		int row = 0;
+		if (file.exists()) {
+			row = 1;
+		}
+		return row;
+	}
+	
+	@PostMapping("delete")
+	public String remove(@RequestParam("bno") int bno, Criteria cri, RedirectAttributes rttr) {
+		log.info("delete...."+bno);
+		boolean row = false;
+		
+		deleteFiles(bno);
+		
+		String filename = service.get(bno).getFilename();
+		if(fileExists(filename) == 0) {
+			row = service.delete(bno);
+		
+			rttr.addFlashAttribute("result", row);
+		}
+		rttr.addFlashAttribute("result", row);
 		return "redirect:/pds/list";
 	}
 }

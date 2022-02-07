@@ -42,4 +42,10 @@ public class PdsServiceImpl implements PdsService {
 		// TODO Auto-generated method stub
 		return mapper.getView(bno);
 	}
+	
+	@Override
+	public boolean delete(int bno) {
+		// TODO Auto-generated method stub
+		return mapper.delete(bno) == 1;
+	}
 }
