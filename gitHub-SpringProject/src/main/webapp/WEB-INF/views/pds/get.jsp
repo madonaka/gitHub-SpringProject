@@ -49,6 +49,9 @@
              <img src="/resources/img/bullet-04.gif"><a href="/pds/download?filename=${pds.filename }"><font size="2" face="돋움"><c:out value="${filename }"></c:out></font>
            </td>
          </tr>
+         <tr>
+			<td><img src="/resources/uploadthumnail/S_${pds.filename }"></td> 
+         </tr>
        </table>
   
       <!--**** 여기서부터 게시물 내용 아래쪽의 버튼들이 나옵니다. 답변, 수정, 삭제, 목록보기 ****-->

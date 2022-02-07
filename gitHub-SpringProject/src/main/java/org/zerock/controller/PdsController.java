@@ -25,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
 import org.zerock.domain.PdsVO;
@@ -63,14 +64,20 @@ public class PdsController {
 	public String postWrite(MultipartFile[] uploadFile, PdsVO pds, RedirectAttributes rttr) {
 		
 		String uploadFolder ="C:\\Temp\\upload";
+		String thumnailFolder ="C:\\Users\\ckdwn\\git\\gitHub-SpringProject\\gitHub-SpringProject\\src\\main\\webapp\\resources\\uploadthumnail";
 		
 		//폴더만들기
 		//File uploadPath = new File(uploadFolder, getFolder());
 		File uploadPath = new File(uploadFolder);
+		File thumnailPath = new File(thumnailFolder);
+		
 		log.info("upload path: "+uploadPath);
 		
 		if(uploadPath.exists() == false) {
 			uploadPath.mkdirs();
+		}
+		if(thumnailPath.exists() == false) {
+			thumnailPath.mkdirs();
 		}
 		
 		for(MultipartFile multipartFile : uploadFile) {
@@ -101,7 +108,7 @@ public class PdsController {
 				
 				//파일 이미지 타입 체크
 				if(checkImagType(saveFile)) {
-					FileOutputStream thumbnail = new FileOutputStream(new File(uploadPath, "S_"+uploadFileName));
+					FileOutputStream thumbnail = new FileOutputStream(new File(thumnailPath, "S_"+uploadFileName));
 					Thumbnailator.createThumbnail(multipartFile.getInputStream(), thumbnail, 100,100);
 					thumbnail.close();
 				}
@@ -134,7 +141,7 @@ public class PdsController {
 		return false;
 	}
 	
-	@GetMapping("/get")
+	@GetMapping({"/get","/modify"})
 	public void get( @RequestParam("bno") int bno, Model model, @ModelAttribute("cri") Criteria cri ) {
 		log.info("/get");
 		
@@ -167,5 +174,12 @@ public class PdsController {
 
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
-
+	@PostMapping("/modify")
+	public String modify(PdsVO pds, RedirectAttributes rttr) {
+		log.info("modify : " + pds);
+		//if(service.modify(board)) {
+		//	rttr.addFlashAttribute("result", "success");
+		//}
+		return "redirect:/pds/list";
+	}
 }
