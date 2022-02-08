@@ -42,10 +42,11 @@
      <img src="/resources/img/bullet-02.gif"><font size="2" face="돋움">는 필수 입력 사항입니다.</font><p>
      
      <form name="modify" method="post" action="/pds/modify" enctype="multipart/form-data" >
+		<input type="hidden" name="bno" value="${pds.bno}">
 		<c:if test="${session !=null }">
 		<input type="hidden" name="userid" value="${session.userid }">
 		</c:if>
-		<!-- <input type="hidden" name="oldfilename" value="${pds.filename }"> -->
+		<input type="hidden" name="oldfilename" value="${pds.filename }">
 		
 	  <table border="0">
        
@@ -68,12 +69,12 @@
        <tr>
          <td align="right"><img src="/resources/img/bullet-02.gif"></td>
          <td><font size="2" face="돋움">기존첨부파일</font></td>
-         <!-- <td><input type="text" size="60" value="${filename }" readOnly></td> -->
+         <td><input type="text" size="60" value="${filename }" readOnly></td>
        </tr>
        <tr>
          <td align="right"><img src="/resources/img/bullet-02.gif"></td>
          <td><font size="2" face="돋움">다시첨부하기</font></td>
-         <td><input type="file" size="60" name="filename" multiple></td>
+         <td><input type="file" size="60" name="newfilename" multiple></td>
        </tr>
         <tr></tr>
 		<tr>

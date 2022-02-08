@@ -2,9 +2,9 @@ package org.zerock.mapper;
 
 import java.util.List;
 
-import org.zerock.domain.BoardVO;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PdsVO;
+import org.zerock.domain.UploadVO;
 
 public interface PdsMapper {
 
@@ -17,5 +17,7 @@ public interface PdsMapper {
 	public PdsVO getView(int bno);
 	
 	public int delete(int bno);
+	
+	public int modify(UploadVO pds);
 
 }

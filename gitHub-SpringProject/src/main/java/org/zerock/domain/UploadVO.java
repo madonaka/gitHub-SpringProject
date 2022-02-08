@@ -8,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import lombok.Data;
 
 @Data
-public class PdsVO{
+public class UploadVO extends BoardVO{
 	private int bno;
 	private String title;
 	private String content;
@@ -16,6 +16,7 @@ public class PdsVO{
 	private Date regdate;
 	private Date updateDate;
 	private String userid;
-	private String filename;
+	private List<MultipartFile> newfilename;
 	private String oldfilename;
+	private String filename;
 }

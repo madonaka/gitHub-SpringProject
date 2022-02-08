@@ -60,4 +60,9 @@
 <delete id="delete">
 	delete from tbl_gittestpds where bno = #{bno}
 </delete>
+
+<update id="modify">
+	update tbl_gittestpds set title=#{title,jdbcType=VARCHAR}, content=#{content,jdbcType=VARCHAR}, filename=#{filename,jdbcType=VARCHAR},
+				updateDate= sysdate where bno=#{bno}
+</update>
 </mapper>

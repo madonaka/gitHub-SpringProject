@@ -9,6 +9,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.core.io.FileSystemResource;
@@ -30,6 +31,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PageMaker;
 import org.zerock.domain.PdsVO;
+import org.zerock.domain.UploadVO;
 import org.zerock.service.PdsService;
 
 import lombok.AllArgsConstructor;
@@ -175,12 +177,84 @@ public class PdsController {
 
 		return new ResponseEntity<Resource>(resource, headers, HttpStatus.OK);
 	}
+	
+
 	@PostMapping("/modify")
-	public String modify(PdsVO pds, RedirectAttributes rttr) {
-		log.info("modify : " + pds);
-		//if(service.modify(board)) {
-		//	rttr.addFlashAttribute("result", "success");
-		//}
+	//oldfile있으면 삭제 후 newfile 등록
+	//oldfile없으면 newfile 등록
+	public String modify(UploadVO pds
+						,Criteria cri
+						,RedirectAttributes rttr) {
+		
+		log.info("modify : " + cri);
+		log.info("oldfile name : "+ pds.getOldfilename());
+		log.info("bno : "+pds.getBno());
+		log.info("title : "+pds.getTitle());
+		log.info("content : "+pds.getContent());
+		log.info("oldfilename의 길이 : "+pds.getOldfilename().length());
+		 
+		
+		log.info("modify : "+ pds);
+		
+		
+		int bno = pds.getBno();
+		String oldfilename = pds.getOldfilename();
+				
+		String uploadFolder ="C:\\Temp\\upload";
+		String thumnailFolder ="C:\\Users\\ckdwn\\git\\gitHub-SpringProject\\gitHub-SpringProject\\src\\main\\webapp\\resources\\uploadthumnail";
+	
+		File uploadPath = new File(uploadFolder);
+		File thumnailPath = new File(thumnailFolder);
+		
+		log.info("upload path: "+uploadPath);
+		
+		if(uploadPath.exists() == false) {
+			uploadPath.mkdirs();
+		}
+		if(thumnailPath.exists() == false) {
+			thumnailPath.mkdirs();
+		}
+		
+		for (MultipartFile newfilename :  pds.getNewfilename()) {
+			//newfile있을 때 
+			if(newfilename.getOriginalFilename() != null) {
+				log.info("newfilename 이름을 확인합니다"+newfilename.getOriginalFilename());
+				
+				UUID uuid = UUID.randomUUID();
+				String filename = uuid.toString() +"_"+newfilename.getOriginalFilename();
+				
+				log.info("아! 이제부터 newfilename은 "+filename+" 입니다");
+				
+				//oldfile은 삭제
+				if(oldfilename.length() != 0) {
+					log.info("newfilename을 확인했으니, oldfilename을 삭제할게요");
+					deleteFiles(bno);
+				}
+				log.info("그럼 newfilename을 등록합니다.");
+				
+				//파일이름 DB등록
+				if(newfilename.getSize()!=0) {
+					pds.setFilename(filename);
+				}
+				service.modify(pds);
+				
+				try {
+					File saveFile = new File(uploadPath, filename);
+					newfilename.transferTo(saveFile);
+					
+					//파일 이미지 타입 체크
+					if(checkImagType(saveFile)) {
+						FileOutputStream thumbnail = new FileOutputStream(new File(thumnailPath, "S_"+filename));
+						Thumbnailator.createThumbnail(newfilename.getInputStream(), thumbnail, 100,100);
+						thumbnail.close();
+					}
+				
+					newfilename.transferTo(saveFile);
+				}catch(Exception e) {
+					log.error(e.getMessage());
+				}
+			}
+		}
 		return "redirect:/pds/list";
 	}
 	
@@ -219,7 +293,7 @@ public class PdsController {
 		return row;
 	}
 	
-	@PostMapping("delete")
+	@PostMapping("/delete")
 	public String remove(@RequestParam("bno") int bno, Criteria cri, RedirectAttributes rttr) {
 		log.info("delete...."+bno);
 		boolean row = false;
@@ -235,4 +309,5 @@ public class PdsController {
 		rttr.addFlashAttribute("result", row);
 		return "redirect:/pds/list";
 	}
+	
 }

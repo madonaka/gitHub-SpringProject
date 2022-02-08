@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.Criteria;
 import org.zerock.domain.PdsVO;
+import org.zerock.domain.UploadVO;
 import org.zerock.mapper.PdsMapper;
 
 import lombok.AllArgsConstructor;
@@ -47,5 +48,11 @@ public class PdsServiceImpl implements PdsService {
 	public boolean delete(int bno) {
 		// TODO Auto-generated method stub
 		return mapper.delete(bno) == 1;
+	}
+	
+	@Override
+	public void modify(UploadVO pds) {
+		log.info("modify..........");
+		mapper.modify(pds);
 	}
 }
