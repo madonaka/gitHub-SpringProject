@@ -10,12 +10,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.zerock.service.BoardService;
+import org.zerock.service.PdsService;
+
+import lombok.AllArgsConstructor;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
+@AllArgsConstructor
 public class HomeController {
+	
+	private BoardService service;
+	
+	private PdsService pService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -32,6 +41,8 @@ public class HomeController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
+		model.addAttribute("board", service.getList());
+		model.addAttribute("pds", pService.getList());
 		
 		return "index";
 	}

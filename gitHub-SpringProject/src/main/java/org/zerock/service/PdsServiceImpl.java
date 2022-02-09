@@ -22,6 +22,12 @@ public class PdsServiceImpl implements PdsService {
 	private PdsMapper mapper;
 	
 	@Override
+	public List<PdsVO> getList() {
+		// TODO Auto-generated method stub
+		return mapper.getList();
+	}
+	
+	@Override
 	public List<PdsVO> getList(Criteria cri) {
 		// TODO Auto-generated method stub
 		log.info("getList :" +cri);

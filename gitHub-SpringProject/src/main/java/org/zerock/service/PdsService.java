@@ -8,6 +8,8 @@ import org.zerock.domain.UploadVO;
 
 public interface PdsService {
 	
+	public List<PdsVO> getList();
+	
 	public List<PdsVO> getList(Criteria cri);
 	
 	public int listCount();

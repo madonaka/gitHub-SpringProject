@@ -8,6 +8,8 @@ import org.zerock.domain.UploadVO;
 
 public interface PdsMapper {
 
+	public List<PdsVO> getList();
+	
 	public List<PdsVO> getListWithPaging(Criteria cri);
 
 	public int listCount();

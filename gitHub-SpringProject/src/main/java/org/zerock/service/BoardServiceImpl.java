@@ -33,11 +33,11 @@ public class BoardServiceImpl implements BoardService {
 		return mapper.modify(board) == 1;
 	}
 	
-	/*@Override
+	@Override
 	public List<BoardVO> getList() {
 		log.info("getList......");
 		return mapper.getList();
-	}*/
+	}
 	
 	@Override
 	public List<BoardVO> getList(Criteria cri) {

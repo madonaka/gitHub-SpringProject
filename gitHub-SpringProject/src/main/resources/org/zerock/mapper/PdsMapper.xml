@@ -6,7 +6,8 @@
 
 <select id="getList" resultType="org.zerock.domain.PdsVO">
 	<![CDATA[
-		select * from tbl_gittestpds where bno < 100
+		select /*+ index_desc(tbl_gittestpds pk_gittestpds) */rownum rom, title, userid, writer, regdate 
+			from tbl_gittestpds where rownum <= 10
 	]]>
 </select>
 

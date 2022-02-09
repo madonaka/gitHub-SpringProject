@@ -6,7 +6,9 @@
 
 <select id="getList" resultType="org.zerock.domain.BoardVO">
 	<![CDATA[
-		select * from tbl_board where bno < 100
+		select /*+index_desc(tbl_board pk_board)*/
+				rownum ron,title,writer,regdate 
+					from tbl_board where rownum <= 10
 	]]>
 </select>
 
