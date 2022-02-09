@@ -10,10 +10,14 @@
 		document.body.appendChild(f);
 		f.submit();
 	}
+	
+	function pdsCheck(){
+		alert("회원만 사용 가능합니다");
+	}
 </Script>
 <html>
  <head><title>Web Programming Test</title>
- <link rel="stylesheet" type="text/css" href="/stylesheet.css">
+ <link rel="stylesheet" type="text/css" href="#">
  <style type="text/css">
    .menu, td {font-size:9pt;}
  </style>
@@ -37,15 +41,22 @@
      <p align="center"><c:if test="${session == null}"><font color="white" size="2"><b><a href="/member/userinfo_insert" class="white">회원가입</a></b></font></c:if></p>
      <p align="center"><c:if test="${session != null}"><font color="white" size="2"><b><a href="" class="white">정보수정</a></b></font></c:if></p>
      </td>
+     <!-- 
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
      <p align="center"><font color="white" size="2"><b>공지사항</b></font></p>
-     </td>
+     </td> -->
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
      <p align="center"><font color="white" size="2"><a href="/board/list"><b>게시판</b></a></font></p>
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
-     <p align="center"><font color="white" size="2"><b><a href="/pds/list" class="white">자료실</a></b></font></p>
+     
+     <p align="center"><font color="white" size="2"><b>
+    
+     <a href="<c:if test="${session==null}">javascript:pdsCheck()</c:if>
+     		<c:if test="${session!=null}">/pds/list</c:if>" class="white">자료실</a>
+     </b></font></p>
      </td>
+     <!-- 
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
      <p align="center"><font color="white" size="2"><b><a href="" class="white">방명록</a></b></font></p>
      </td>
@@ -54,7 +65,7 @@
      </td>
      <td bgcolor="#9966ff" width="10%" onmouseover="style.backgroundColor='#2772D3'" onmouseout="style.backgroundColor=''">
      <p align="center"><font color="white" size="2"><b>관리자</b></font></p>
-     </td>
+     </td> -->
    </tr>                   
    <tr>
      <td colspan="8">
